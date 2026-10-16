@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-medical-teal: #0F766E;
+  --color-medical-teal-dark: #0D635C;
+  --color-medical-teal-light: #2DD4BF;
+  --color-healthcare-navy: #12304A;
+  --color-cloud-white: #F7FAFC;
+  --color-soft-mint: #E8F5F3;
+  --color-slate-text: #334155;
+  --color-muted-text: #64748B;
+  --color-soft-border: #DCE7EC;
+  --color-success-green: #15803D;
+  --color-warning-amber: #D97706;
+  --color-emergency-red: #DC2626;
+  --color-info-blue: #2563EB;
+
+  /* Dark mode specific colors */
+  --color-dark-bg: #101C2C;
+  --color-dark-surface: #172638;
+  --color-dark-elevated: #203449;
+  --color-dark-border: #334155;
+  --color-dark-text: #CBD5E1;
+  --color-dark-heading: #F1F5F9;
+}
+
+:root {
+  color-scheme: light;
+  --color-primary: #0F766E;
+  --color-primary-accent: #0F766E;
+  --color-background: #F7FAFC;
+  --color-surface: #FFFFFF;
+  --color-surface-elevated: #FFFFFF;
+  --color-heading: #12304A;
+  --color-text: #334155;
+  --color-muted: #64748B;
+  --color-border: #DCE7EC;
+  --color-mint: #E8F5F3;
+  --color-navy: #12304A;
+  --color-success: #15803D;
+  --color-warning: #D97706;
+  --color-danger: #DC2626;
+  --color-info: #2563EB;
+}
+
+html.dark {
+  color-scheme: dark;
+  --color-primary: #2DD4BF;
+  --color-primary-accent: #2DD4BF;
+  --color-background: #101C2C;
+  --color-surface: #172638;
+  --color-surface-elevated: #203449;
+  --color-heading: #F1F5F9;
+  --color-text: #CBD5E1;
+  --color-muted: #94A3B8;
+  --color-border: #334155;
+  --color-mint: rgba(45, 212, 191, 0.12);
+  --color-navy: #F1F5F9;
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+  --color-info: #3B82F6;
+}
+
+@layer utilities {
+  .bg-healthcare-bg {
+    background-color: var(--color-background);
+  }
+  .bg-healthcare-surface {
+    background-color: var(--color-surface);
+  }
+  .bg-healthcare-elevated {
+    background-color: var(--color-surface-elevated);
+  }
+  .bg-healthcare-mint {
+    background-color: var(--color-mint);
+  }
+  .text-healthcare-navy {
+    color: var(--color-heading);
+  }
+  .text-healthcare-text {
+    color: var(--color-text);
+  }
+  .text-healthcare-muted {
+    color: var(--color-muted);
+  }
+  .text-healthcare-primary {
+    color: var(--color-primary);
+  }
+  .border-healthcare-border {
+    border-color: var(--color-border);
+  }
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-heading);
+  }
+
+  :lang(mr), :lang(hi) {
+    font-family: 'Noto Sans Devanagari', 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  header, footer, nav, #ai-assistant-widget, .no-print, [role="navigation"] {
+    display: none !important;
+  }
+  .print-slip-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .print-avoid-break {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+}

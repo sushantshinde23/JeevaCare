@@ -1,0 +1,6 @@
+{
+  "name": "MaatriCare AI",
+  "description": "AI-Powered Maternal & Newborn Emergency Referral, Transport and Healthcare Coordination Platform. Every Mother. Every Newborn. Every Second Counts.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>JeevaCare — Maternal &amp; Newborn Emergency Care Platform</title>
+    <meta name="description" content="JeevaCare — AI-Powered Maternal &amp; Newborn Emergency Referral, Transport and Healthcare Coordination Platform. Every Mother. Every Newborn. Every Moment." />
+    <meta property="og:title" content="JeevaCare — Maternal &amp; Newborn Emergency Care Platform" />
+    <meta property="og:description" content="JeevaCare — AI-Powered Maternal &amp; Newborn Emergency Referral, Transport and Healthcare Coordination Platform. Every Mother. Every Newborn. Every Moment." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+      (function() {
+        try {
+          var storedTheme = localStorage.getItem('matricare_theme_pref');
+          var effectiveTheme = 'light';
+          if (storedTheme === 'dark') {
+            effectiveTheme = 'dark';
+          } else if (storedTheme === 'system') {
+            effectiveTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          }
+          if (effectiveTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            document.documentElement.style.colorScheme = 'dark';
+          } else {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.style.colorScheme = 'light';
+          }
+          var storedLang = localStorage.getItem('matricare_language_pref');
+          if (storedLang && (storedLang === 'en' || storedLang === 'mr' || storedLang === 'hi')) {
+            document.documentElement.lang = storedLang;
+          } else {
+            document.documentElement.lang = 'en';
+          }
+        } catch(e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

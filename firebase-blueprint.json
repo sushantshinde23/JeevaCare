@@ -1,0 +1,308 @@
+{
+  "entities": {
+    "users": {
+      "title": "User",
+      "description": "User profile with role-based access information",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique user ID",
+          "maxLength": 128
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "User email address",
+          "maxLength": 128
+        },
+        "name": {
+          "type": "string",
+          "description": "Full name of the healthcare worker, patient or coordinator",
+          "maxLength": 128
+        },
+        "role": {
+          "type": "string",
+          "description": "Assigned user role in the system",
+          "enum": ["patient", "health_worker", "hospital_coordinator", "transport_coordinator", "admin"]
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact phone number",
+          "maxLength": 20
+        },
+        "assignedFacilityId": {
+          "type": "string",
+          "description": "Facility ID if hospital or transport coordinator",
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp of profile creation",
+          "maxLength": 64
+        }
+      },
+      "required": ["id", "email", "name", "role"]
+    },
+    "facilities": {
+      "title": "Facility",
+      "description": "Hospital or First Referral Unit directory details",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Facility identifier",
+          "maxLength": 128
+        },
+        "name": {
+          "type": "string",
+          "description": "Hospital name",
+          "maxLength": 150
+        },
+        "facilityType": {
+          "type": "string",
+          "description": "Type of maternal care facility",
+          "enum": ["cemonc", "bemonc", "district_hospital", "medical_college", "sub_district_hospital"]
+        },
+        "phone": {
+          "type": "string",
+          "description": "Emergency hotline",
+          "maxLength": 20
+        },
+        "address": {
+          "type": "string",
+          "description": "Physical address",
+          "maxLength": 300
+        },
+        "district": {
+          "type": "string",
+          "description": "District",
+          "maxLength": 100
+        },
+        "latitude": {
+          "type": "number",
+          "description": "Latitude coordinate"
+        },
+        "longitude": {
+          "type": "number",
+          "description": "Longitude coordinate"
+        },
+        "activeReferralCount": {
+          "type": "number",
+          "description": "Active in-flight referrals"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last update timestamp",
+          "maxLength": 64
+        }
+      },
+      "required": ["id", "name", "facilityType", "phone", "latitude", "longitude"]
+    },
+    "referrals": {
+      "title": "Referral",
+      "description": "Emergency maternal and newborn referral record",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique referral tracking ID",
+          "maxLength": 128
+        },
+        "patientName": {
+          "type": "string",
+          "description": "Patient's full name",
+          "maxLength": 100
+        },
+        "patientAge": {
+          "type": "number",
+          "description": "Patient age in years"
+        },
+        "gestationalAgeWeeks": {
+          "type": "number",
+          "description": "Gestational age in weeks"
+        },
+        "gravida": {
+          "type": "number",
+          "description": "Number of pregnancies"
+        },
+        "para": {
+          "type": "number",
+          "description": "Number of births"
+        },
+        "bloodGroup": {
+          "type": "string",
+          "description": "Blood group",
+          "maxLength": 10
+        },
+        "chiefComplaint": {
+          "type": "string",
+          "description": "Chief clinical complaint",
+          "maxLength": 500
+        },
+        "triageUrgency": {
+          "type": "string",
+          "description": "Urgency classification",
+          "enum": ["critical", "high", "moderate", "low"]
+        },
+        "status": {
+          "type": "string",
+          "description": "Referral tracking state",
+          "enum": ["draft", "submitted", "accepted", "transport_dispatched", "arrived", "admitted", "completed", "cancelled"]
+        },
+        "sourceLocation": {
+          "type": "string",
+          "description": "Referral origin location",
+          "maxLength": 200
+        },
+        "receivingFacilityId": {
+          "type": "string",
+          "description": "Destination facility identifier",
+          "maxLength": 128
+        },
+        "referringWorkerId": {
+          "type": "string",
+          "description": "Referring ASHA or health worker UID",
+          "maxLength": 128
+        },
+        "referringWorkerName": {
+          "type": "string",
+          "description": "Referring health worker name",
+          "maxLength": 100
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp",
+          "maxLength": 64
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Update timestamp",
+          "maxLength": 64
+        }
+      },
+      "required": ["id", "patientName", "triageUrgency", "status", "receivingFacilityId", "referringWorkerId"]
+    },
+    "transports": {
+      "title": "TransportRequest",
+      "description": "Ambulance emergency dispatch request",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Transport request identifier",
+          "maxLength": 128
+        },
+        "referralId": {
+          "type": "string",
+          "description": "Linked referral ID",
+          "maxLength": 128
+        },
+        "patientName": {
+          "type": "string",
+          "description": "Patient name",
+          "maxLength": 100
+        },
+        "destinationFacilityId": {
+          "type": "string",
+          "description": "Destination facility ID",
+          "maxLength": 128
+        },
+        "status": {
+          "type": "string",
+          "description": "Dispatch status",
+          "enum": ["requested", "assigned", "en_route_pickup", "patient_picked_up", "en_route_facility", "delivered", "cancelled"]
+        },
+        "assignedAmbulanceId": {
+          "type": "string",
+          "description": "Assigned ambulance vehicle ID",
+          "maxLength": 64
+        },
+        "driverPhone": {
+          "type": "string",
+          "description": "Ambulance pilot phone number",
+          "maxLength": 20
+        },
+        "estimatedMinutes": {
+          "type": "number",
+          "description": "ETA in minutes"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last update timestamp",
+          "maxLength": 64
+        }
+      },
+      "required": ["id", "referralId", "patientName", "destinationFacilityId", "status"]
+    },
+    "notifications": {
+      "title": "InAppNotification",
+      "description": "Real-time critical clinical and referral alerts",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Notification ID",
+          "maxLength": 128
+        },
+        "title": {
+          "type": "string",
+          "description": "Notification title",
+          "maxLength": 150
+        },
+        "message": {
+          "type": "string",
+          "description": "Notification text",
+          "maxLength": 500
+        },
+        "type": {
+          "type": "string",
+          "description": "Alert category",
+          "enum": ["urgent", "info", "warning", "success"]
+        },
+        "recipientRole": {
+          "type": "string",
+          "description": "Target user role",
+          "enum": ["patient", "health_worker", "hospital_coordinator", "transport_coordinator", "admin", "all"]
+        },
+        "referralId": {
+          "type": "string",
+          "description": "Related referral ID",
+          "maxLength": 128
+        },
+        "read": {
+          "type": "boolean",
+          "description": "Read flag"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp",
+          "maxLength": 64
+        }
+      },
+      "required": ["id", "title", "message", "type", "recipientRole", "read"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "users" },
+      "description": "User profiles and RBAC role assignments"
+    },
+    "/facilities/{facilityId}": {
+      "schema": { "$ref": "facilities" },
+      "description": "Emergency obstetric and newborn care facilities"
+    },
+    "/referrals/{referralId}": {
+      "schema": { "$ref": "referrals" },
+      "description": "Maternal and newborn emergency referral cases"
+    },
+    "/transports/{transportId}": {
+      "schema": { "$ref": "transports" },
+      "description": "Emergency transport coordination and dispatch"
+    },
+    "/notifications/{notificationId}": {
+      "schema": { "$ref": "notifications" },
+      "description": "System-wide and role-targeted emergency notifications"
+    }
+  }
+}

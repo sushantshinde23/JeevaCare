@@ -1,0 +1,79 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default deny all unknown paths
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == 'sushantshinde5598@gmail.com' ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    // User Profiles
+    match /users/{userId} {
+      allow get: if isSignedIn() && (isOwner(userId) || isAdmin());
+      allow list: if isAdmin();
+      allow create: if isSignedIn() && isValidId(userId) && request.auth.uid == userId
+        && request.resource.data.id == userId
+        && request.resource.data.email is string
+        && request.resource.data.name is string
+        && request.resource.data.role in ['patient', 'health_worker', 'hospital_coordinator', 'transport_coordinator', 'admin'];
+      allow update: if isSignedIn() && (isOwner(userId) || isAdmin())
+        && request.resource.data.id == resource.data.id
+        && (isAdmin() || request.resource.data.role == resource.data.role);
+      allow delete: if isAdmin();
+    }
+
+    // Connection health check
+    match /test/{docId} {
+      allow read: if true;
+    }
+
+    // Healthcare Facilities
+    match /facilities/{facilityId} {
+      allow read: if true;
+      allow write: if isSignedIn();
+    }
+
+    // Referrals
+    match /referrals/{referralId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && isValidId(referralId);
+      allow update: if isSignedIn() && isValidId(referralId);
+      allow delete: if isAdmin();
+    }
+
+    // Transport Dispatches
+    match /transports/{transportId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && isValidId(transportId);
+      allow update: if isSignedIn() && isValidId(transportId);
+      allow delete: if isAdmin();
+    }
+
+    // In-App Notifications
+    match /notifications/{notificationId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && isValidId(notificationId);
+      allow update: if isSignedIn() && isValidId(notificationId);
+      allow delete: if isAdmin();
+    }
+  }
+}

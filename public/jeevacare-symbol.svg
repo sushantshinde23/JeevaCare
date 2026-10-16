@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="100%" height="100%">
+  <defs>
+    <linearGradient id="symTealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#12304A" />
+      <stop offset="50%" stop-color="#0F766E" />
+      <stop offset="100%" stop-color="#14B8A6" />
+    </linearGradient>
+    <linearGradient id="symLightTeal" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0F766E" />
+      <stop offset="100%" stop-color="#2DD4BF" />
+    </linearGradient>
+  </defs>
+
+  <!-- Medical Cross on Upper Right -->
+  <g transform="translate(230, 35)">
+    <rect x="15" y="0" width="14" height="42" rx="4" fill="#14B8A6" />
+    <rect x="1" y="14" width="42" height="14" rx="4" fill="#14B8A6" />
+  </g>
+
+  <!-- Mother & Baby Heart Emblem -->
+  <g transform="translate(45, 10)">
+    <!-- Outer Cradling Leaf / Heart Curve (Left & Bottom) -->
+    <path d="M 115 45 C 65 50, 25 90, 20 145 C 15 205, 50 250, 115 300 C 120 295, 125 290, 130 282 C 75 240, 48 200, 50 155 C 52 110, 85 75, 120 65 C 118 58, 116 51, 115 45 Z"
+          fill="url(#symTealGrad)" />
+
+    <!-- Mother Head & Serene Profile -->
+    <circle cx="128" cy="90" r="22" fill="#12304A" />
+    <path d="M 128 85 C 135 90, 140 98, 137 108 C 135 115, 129 120, 122 122 C 130 126, 133 132, 130 138 C 123 150, 105 155, 95 158 C 103 145, 110 130, 113 115 C 115 105, 110 98, 103 92 Z"
+          fill="url(#symTealGrad)" />
+
+    <!-- Cradled Newborn Baby (Facing Mother) -->
+    <circle cx="145" cy="172" r="20" fill="#0F766E" />
+    <path d="M 137 170 C 140 166, 145 164, 150 166 C 153 168, 155 171, 154 175 C 153 179, 149 181, 145 181 C 140 181, 136 176, 137 170 Z"
+          fill="#FFFFFF" opacity="0.35" />
+
+    <!-- Protective Cradling Hand & Lower Swaddling Arc -->
+    <path d="M 115 300 C 155 268, 200 225, 202 165 C 204 135, 190 108, 172 90 C 175 105, 172 122, 163 138 C 154 155, 140 168, 130 180 C 118 193, 105 205, 92 214 C 105 216, 122 211, 135 202 C 148 193, 158 181, 167 167 C 175 195, 152 240, 115 300 Z"
+          fill="url(#symLightTeal)" />
+
+    <!-- Inner Tender Swaddle Sweep -->
+    <path d="M 92 214 C 110 235, 136 248, 162 240 C 180 234, 193 218, 198 198 C 193 226, 162 260, 115 298 C 98 268, 92 240, 92 214 Z"
+          fill="#0F766E" opacity="0.85" />
+  </g>
+</svg>
